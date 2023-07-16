@@ -1,0 +1,76 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(0deg, #effced, #D3D3D3);
+    padding: 0 20px;
+
+    #Layer_1 {
+        width: 50px;
+        margin: 0 20px;
+    }
+
+    #Layer_1:hover {
+        animation: flower 1s ease;
+    }
+
+    @keyframes flower {
+        from {
+            transform: rotateZ(0deg);
+        }
+
+        to {
+            transform: rotateZ(360deg);
+        }
+    }
+
+    .nav-list {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        flex: 1 1 0;
+
+        .nav-list-items {
+            margin-right: 20px;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: #050505;
+            cursor: pointer;
+        }
+    }
+
+    .menu {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        padding: 5px;
+        color: #000;
+        font-size: 18px;
+    }
+
+    @media screen and (max-width: 500px) {
+        .nav-list {
+            position: fixed;
+            top: 0;
+            right: 0;
+            // background: rgb(12, 12, 12);
+            flex-direction: column;
+            height: auto;
+            padding: 50px 50px 20px 50px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(2px);
+        }
+
+        .nav-list-items {
+            width: 100%;
+            text-align: left;
+            margin-right: 0px;
+            padding: 10px 0;
+        }
+    }
+}
