@@ -33,7 +33,7 @@ const Navbar: FC = () => {
         <ul className="nav-list">
           <NavLink className="nav-list-items" to="/Login" >Login</NavLink>
           <NavLink className="nav-list-items" to="/Product" >Product</NavLink>
-          <NavLink className="nav-list-items" to="/Contact" >Contact Us</NavLink>
+          <NavLink className="nav-list-items" to="/Contact" >Contact</NavLink>
         </ul>
       )}
       {toggleMenu ? (screenWidth <= 500) && <img onClick={toggleNav} className="menu" src={close} /> : (screenWidth <= 500) && <img onClick={toggleNav} className="menu" src={menu} />}

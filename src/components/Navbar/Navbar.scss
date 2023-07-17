@@ -2,10 +2,11 @@ nav {
     display: flex;
     flex-direction: row;
     top: 0;
-    width: 100%;
+    width: auto;
     height: 70px;
     background: linear-gradient(0deg, #effced, #D3D3D3);
     padding: 0 20px;
+    justify-content: space-around;
 
     #Layer_1 {
         width: 50px;
@@ -28,18 +29,23 @@ nav {
 
     .nav-list {
         height: 100%;
+        width: 60%;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
-        position: relative;
-        flex: 1 1 0;
+        
 
         .nav-list-items {
+            width: auto;
             margin-right: 20px;
-            font-size: 20px;
-            text-transform: uppercase;
-            color: #050505;
+            font-size: 16px;
+            font-weight: 800;
+            color: #232323;
             cursor: pointer;
+            text-decoration:none;
+        }
+        .nav-list-items:hover{
+            color: rgb(93, 93, 93);
         }
     }
 
@@ -47,20 +53,19 @@ nav {
         position: absolute;
         right: 20px;
         top: 20px;
-        padding: 5px;
         color: #000;
-        font-size: 18px;
     }
 
     @media screen and (max-width: 500px) {
         .nav-list {
+            max-width: 150px;
             position: fixed;
             top: 0;
             right: 0;
-            // background: rgb(12, 12, 12);
             flex-direction: column;
+            
             height: auto;
-            padding: 50px 50px 20px 50px;
+            padding: 40px 30px 20px 10px;
             border-radius: 5px;
             background-color: rgba(255, 255, 255, .15);
             backdrop-filter: blur(2px);
