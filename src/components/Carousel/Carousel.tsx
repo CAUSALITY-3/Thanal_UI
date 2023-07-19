@@ -5,15 +5,16 @@ import "./Carousel.scss"
 
 interface Props {
     children?: ReactNode;
+    type:string;
 }
 
-const Carousel: FC<Props> = ({ children, ...props }) => {
+const Carousel: FC<Props> = ({ children, type }) => {
     const [width, setWidth] = useState(0)
     const carousel = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
         if(carousel.current){
-            setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 40)
+            setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 30)
         }
         
     },[])
@@ -22,9 +23,8 @@ const Carousel: FC<Props> = ({ children, ...props }) => {
     return (
         <>
             <motion.div  className='carousel' >
-                <h3>Carousel</h3>
-
-                <motion.div style={{ width: carousel?.current?.scrollWidth , background:"white" }} drag='x' dragConstraints = {{right:0, left: -width }} ref = {carousel}  className="child">{children}</motion.div>
+                <h1>{type}</h1>
+                <motion.div style={{ width: carousel?.current?.scrollWidth }} drag='x' dragConstraints = {{right:0, left: -width }} ref = {carousel}  className="child">{children}</motion.div>
             </motion.div>
         </>
 
