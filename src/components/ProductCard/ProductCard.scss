@@ -1,0 +1,14 @@
+.poduct-box{
+    width: 200px;
+    height: 200px;
+    background-color: bisque;
+    transition: transform .3s ease-out;
+    
+    
+
+}
+.poduct-box:hover{
+    cursor: pointer;
+    box-shadow: 5px 5px 10px 2px rgb(167, 167, 167);
+    transform: translate(2px, -5px);
+}

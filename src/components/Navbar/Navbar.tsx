@@ -28,11 +28,13 @@ const Navbar: FC = () => {
   }
   return (
     <nav>
-      <img id='Layer_1' src={logo} />
+      <NavLink className="logo" to="/" >
+        <img id='Layer_1' src={logo} />
+        </NavLink>
       {(toggleMenu || screenWidth > 500) && (
         <ul className="nav-list">
           <NavLink className="nav-list-items" to="/Login" >Login</NavLink>
-          <NavLink className="nav-list-items" to="/Product" >Product</NavLink>
+          <NavLink className="nav-list-items" to="/Product" >Products</NavLink>
           <NavLink className="nav-list-items" to="/Contact" >Contact</NavLink>
         </ul>
       )}

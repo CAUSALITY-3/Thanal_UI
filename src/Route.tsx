@@ -1,7 +1,7 @@
 
 import Home from './pages/Home/Home'
 import { useRoutes } from 'react-router-dom'
-import { Login, Product, Contact } from './pages'
+import { Login, Products, Contact } from './pages'
 
 const Route = () => {
     const element = useRoutes([
@@ -15,7 +15,7 @@ const Route = () => {
         },
         {
             path: "/Product",
-            element: <Product />,
+            element: <Products />,
         },
         {
             path: "/Contact",
