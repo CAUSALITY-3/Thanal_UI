@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ProductCard, Carousel } from "../../components";
+import { ProductCard, Carousel, Footer } from "../../components";
 import "./Home.scss";
 
 const Home: FC = () => {
@@ -109,6 +109,7 @@ const Home: FC = () => {
           </Carousel>
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };

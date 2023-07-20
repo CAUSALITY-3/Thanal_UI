@@ -74,13 +74,13 @@ nav {
             border-radius: 5px;
             background-color: rgba(255, 255, 255, .15);
             backdrop-filter: blur(2px);
-        }
 
-        .nav-list-items {
-            width: 100%;
-            text-align: left;
-            margin-right: 0px;
-            padding: 10px 0;
+            .nav-list-items {
+                width: 100%;
+                text-align: left;
+                margin-right: 0px;
+                padding: 10px 0;
+            }
         }
     }
 }

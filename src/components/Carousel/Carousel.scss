@@ -1,5 +1,5 @@
 .carousel{
-    width:100%;
+    width:97%;
     height: 500px;
     background-color: rgb(174, 255, 255);
     display: flex;
@@ -8,6 +8,9 @@
     overflow: hidden;
     margin: 20px 0;
     padding: 10px;
+    .carousel-title{
+        margin-left: 10px;
+    }
     .child{
         display: flex;
         cursor: grab;

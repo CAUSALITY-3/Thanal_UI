@@ -1,0 +1,29 @@
+.product {
+  display: flex;
+  flex-direction: column;
+  .product-cat {
+    height: 600px;
+    background-color: beige;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    // flex-direction: column;
+        justify-content: space-between;
+    padding: 40px;
+    .product-list {
+        margin: 20px;
+        width: 200px;
+        min-height: 300px;
+        height: auto;
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .product-type{
+            
+        }
+    }
+  }
+}

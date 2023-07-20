@@ -23,7 +23,7 @@ const Carousel: FC<Props> = ({ children, type }) => {
     return (
         <>
             <motion.div  className='carousel' >
-                <h1>{type}</h1>
+                <h1 className='carousel-title'>{type}</h1>
                 <motion.div style={{ width: carousel?.current?.scrollWidth }} drag='x' dragConstraints = {{right:0, left: -width }} ref = {carousel}  className="child">{children}</motion.div>
             </motion.div>
         </>
