@@ -6,8 +6,9 @@ interface Props {
   props: {
     name: string;
     description: string;
-    photoUrls: string[];
+    image: string;
     price: number;
+productId: string;
   };
 }
 
@@ -31,7 +32,7 @@ const ProductCard: FC<Props> = ({ props }) => {
       onMouseDown={(e) => mouseDownCoords(e)}
       onMouseUp={(e) => clickOrDrag(e)}
     >
-      <img className="card-image" src={props.photoUrls[0]}></img>
+      <img className="card-image" src={props.image}></img>
 
 <div className="product-details">
       <p className="product-name">{props.name}</p>
