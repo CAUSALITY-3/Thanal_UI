@@ -1,8 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import { ProductCard, Carousel, Footer } from "../../components";
+import { useAppSelector, useAppDispatch } from '../../Store/hooks'
+import { fetchProducts } from './homeSlice'
 import "./Home.scss";
 
-type ProductMainListType = {
+
+interface ProductMainListType {
   type: string;
   data: {
     category: string;
@@ -15,26 +18,20 @@ type ProductMainListType = {
 };
 
 const Home: FC = () => {
-  const [mainData, setData] = useState<ProductMainListType[]>([]);
-  const [flag, setflag] = useState<boolean>(false);
-  useEffect(() => {
-    async function getMainData() {
-      const res = await fetch(
-        "https://lovely-pugs-deny.loca.lt/products/productMainList"
-      );
-      if (!res.ok) throw new Error("Error while fetching mainData");
+  
+  const mainData = useAppSelector(state => state.home.productMainList)
+  const loading = useAppSelector(state => state.home.loading)
+  const dispatch = useAppDispatch()
 
-      const data: ProductMainListType[] = await res.json();
-      console.log("res", data);
-      setData(data);
-      return res.json();
-    }
-    getMainData();
-  }, [flag]);
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
+
   return (
     <div className="home">
-      <div className="first-page" onClick={() => setflag(true)}>
+      <div className="first-page" onClick={() => {console.log("sasi",loading)}}>
         Home
+        <div>{loading?"loading":"Got it"}</div>
       </div>
       <div className="sections">
         {mainData.map((item, key) => (
