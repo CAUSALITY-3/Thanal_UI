@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import homeReducer from '../pages/Home/homeSlice'
-import productCardReducer from '../components/ProductCard/productCardSlice'
+import productCardReducer from '../components/Product/ProductCard/productCardSlice'
 
 const store = configureStore({
   reducer: {

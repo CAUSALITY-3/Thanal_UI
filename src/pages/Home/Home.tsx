@@ -5,20 +5,8 @@ import { fetchProducts } from './homeSlice'
 import "./Home.scss";
 
 
-interface ProductMainListType {
-  type: string;
-  data: {
-    category: string;
-    name: string;
-    description: string;
-    image: string;
-    price: number;
-    productId: string;
-  }[];
-};
 
 const Home: FC = () => {
-  
   const mainData = useAppSelector(state => state.home.productMainList)
   const loading = useAppSelector(state => state.home.loading)
   const dispatch = useAppDispatch()
@@ -29,7 +17,7 @@ const Home: FC = () => {
 
   return (
     <div className="home">
-      <div className="first-page" onClick={() => {console.log("sasi",loading)}}>
+      <div className="first-page">
         Home
         <div>{loading?"loading":"Got it"}</div>
       </div>

@@ -5,7 +5,7 @@ import close from '../../assets/close.svg'
 import logo from '../../assets/logo.svg'
 import './Navbar.scss'
 
-const Navbar: FC = () => {
+export const Navbar: FC = () => {
   const [toggleMenu, setToggleMenu] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
@@ -34,7 +34,7 @@ const Navbar: FC = () => {
       {(toggleMenu || screenWidth > 500) && (
         <ul className="nav-list">
           <NavLink className="nav-list-items" to="/Login" >Login</NavLink>
-          <NavLink className="nav-list-items" to="/Product" >Products</NavLink>
+          <NavLink className="nav-list-items" to="/Products" >Products</NavLink>
           <NavLink className="nav-list-items" to="/Contact" >Contact</NavLink>
         </ul>
       )}

@@ -8,13 +8,13 @@ interface Props {
     type:string;
 }
 
-const Carousel: FC<Props> = ({ children, type }) => {
+export const Carousel: FC<Props> = ({ children, type }) => {
     const [width, setWidth] = useState(0)
     const carousel = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
         if(carousel.current){
-            setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth + 30)
+            setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth )
         }
         
     },[])
@@ -30,5 +30,3 @@ const Carousel: FC<Props> = ({ children, type }) => {
 
     )
 }
-
-export default Carousel
