@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { ProductCard, Carousel, Footer } from "../../components";
+import { ProductCard, Carousel } from "../../components";
 import { useAppSelector, useAppDispatch } from '../../Store/hooks'
 import { fetchProducts } from './homeSlice'
 import "./Home.scss";
@@ -32,7 +32,6 @@ const Home: FC = () => {
           </Carousel>
         ))}
       </div>
-      <Footer />
     </div>
   );
 };
