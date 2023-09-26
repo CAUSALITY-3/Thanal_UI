@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 import { useParams } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../../Store/hooks'
 import { fetchProduct } from '../ProductCard/productCardSlice'
+import "./ProductDetail.scss"
 
 
 export const ProductDetail: FC = () => {
@@ -11,11 +12,15 @@ export const ProductDetail: FC = () => {
   const dispatch = useAppDispatch()
   const {id} = useParams();
   useEffect(() => {
+    console.log("Ravi")
     dispatch(fetchProduct(id||""))
   }, [])
 
     
   return (
-    <div onClick={()=>console.log(product)}>ProductDetail {product.name}</div>
+    <div className="pr0duct-detai1">
+      <div className="route-link"></div>
+      <div className="product-detail-container"></div>
+    </div>
   )
 }

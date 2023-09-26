@@ -12,7 +12,9 @@ const Home: FC = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    if(!mainData || mainData.length===0){
+      dispatch(fetchProducts())
+    }
   }, [])
 
   return (
