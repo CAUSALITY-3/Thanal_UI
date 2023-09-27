@@ -1,11 +1,14 @@
 .pr0duct-detai1{
-    background-color: blue;
+    background-color: azure;
     padding: 1%;
-    
+    .route-link{
+        margin-bottom: 10px;
+        color: rgb(88, 88, 88);
+    }
     .product-detail-container{
         // width: 97%;
         border-radius: 5px;
-        min-height: 500px;
-        background-color: red;
+        height: 500px;
+        background-color: rgb(172, 251, 225);
     }
 }

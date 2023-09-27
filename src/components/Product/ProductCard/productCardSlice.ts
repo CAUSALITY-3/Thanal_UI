@@ -15,6 +15,7 @@ type ProductData = {
   price: number;
   productId: string;
   priority:number;
+  _id:string;
 };
 const initialState: InitialState = {
   loading: false,
@@ -25,7 +26,8 @@ const initialState: InitialState = {
     image: "",
     price: 0,
     productId: "",
-    priority:0
+    priority:0,
+    _id:""
   },
   error: "",
 };
