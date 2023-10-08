@@ -24,8 +24,13 @@ export const ProductDetail: FC = () => {
     <div className="pr0duct-detai1">
       <div className="route-link">{routeLinkText}</div>
       <div className="product-detail-container">
-        <div className="product-image"></div>
-        <div className="product-detail"></div>
+        <div className="product-image">
+          <img className="product-image-tag" src={product.images[1]} alt="" />
+        </div>
+        <div className="product-detail">
+          <h2>{product.name}</h2>
+          <h3>{product.description}</h3>
+        </div>
       </div>
     </div>
   );

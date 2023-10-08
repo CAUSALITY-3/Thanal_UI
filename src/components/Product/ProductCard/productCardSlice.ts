@@ -12,10 +12,11 @@ type ProductData = {
   name: string;
   description: string;
   image: string;
+  images: string[];
   price: number;
   productId: string;
-  priority:number;
-  _id:string;
+  priority: number;
+  _id: string;
 };
 const initialState: InitialState = {
   loading: false,
@@ -24,10 +25,11 @@ const initialState: InitialState = {
     name: "",
     description: "",
     image: "",
+    images: [],
     price: 0,
     productId: "",
-    priority:0,
-    _id:""
+    priority: 0,
+    _id: "",
   },
   error: "",
 };
@@ -35,7 +37,7 @@ const initialState: InitialState = {
 // Generates pending, fulfilled and rejected action types
 export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
-  async (id:string) => {
+  async (id: string) => {
     const res = await axios.get(
       `http://localhost:5000/products/product?id=${id}`
     );
@@ -52,7 +54,7 @@ const productCardSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(
-        fetchProduct.fulfilled,
+      fetchProduct.fulfilled,
       (state, action: PayloadAction<ProductData>) => {
         state.loading = false;
         state.productData = action.payload;

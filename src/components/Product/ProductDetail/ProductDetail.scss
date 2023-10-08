@@ -26,13 +26,15 @@
     align-items: center;
 
     .product-image {
-      height: 380px;
-      width: 380px;
+      width: 45%;
       background-color: aqua;
+      .product-image-tag{
+        width: 100%;
+      }
     }
     .product-detail {
-      height: 400px;
-      width: 900px;
+      height: 100%;
+      width: 50%;
       background-color: rgb(22, 116, 116);
     }
   }
