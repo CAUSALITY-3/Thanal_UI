@@ -3,8 +3,18 @@ import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../../Store/hooks";
 import { fetchProduct } from "../ProductCard/productCardSlice";
 import "./ProductDetail.scss";
+import * as stylex from '@stylexjs/stylex';
+
 
 export const ProductDetail: FC = () => {
+
+  const styles = stylex.create({
+    ss: {
+      color:"red"
+    },
+  });
+  
+
   const product = useAppSelector((state) => state.product.productData);
   const loading = useAppSelector((state) => state.product.loading);
   const routeLinkText = `Products > ${product.category || loading} > ${
@@ -29,7 +39,8 @@ export const ProductDetail: FC = () => {
         </div>
         <div className="product-detail">
           <h2>{product.name}</h2>
-          <h3>{product.description}</h3>
+          <h3 {...stylex.props(
+    styles.ss)}>{product.description}</h3>
         </div>
       </div>
     </div>

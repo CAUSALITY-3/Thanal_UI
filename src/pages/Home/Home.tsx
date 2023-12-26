@@ -9,6 +9,7 @@ import "./Home.scss";
 const Home: FC = () => {
   const mainData = useAppSelector(state => state.home.productMainList)
   const loading = useAppSelector(state => state.home.loading)
+  const error = useAppSelector(state => state.home.error)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -21,12 +22,12 @@ const Home: FC = () => {
     <div className="home">
       <div className="first-page">
         Home
-        <div>{loading?"loading":"Got it"}</div>
+        {!error ? <div>{loading?"loading":"Got it"}</div>: <div>Error</div>}
       </div>
       <div className="sections">
         {mainData.map((item, key) => (
           <Carousel key={key} type={item.type}>
-            {item.data.map((item, key) => (
+            {Object.values(item.data).map((item, key) => (
               <div className="margin-provider" key={key}>
                 <ProductCard props={item} />
               </div>

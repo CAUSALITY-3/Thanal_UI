@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "@stylexjs/stylex": "^0.3.0",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.5.0",
     "framer-motion": "^10.12.22",
@@ -21,6 +22,7 @@
     "sass": "^1.63.6"
   },
   "devDependencies": {
+    "@stylexjs/dev-runtime": "^0.3.0",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
