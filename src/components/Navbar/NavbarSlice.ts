@@ -7,7 +7,7 @@ const initialState: InitialState = {
   isMobile: false,
 };
 
-const appSlice = createSlice({
+const navSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
@@ -21,5 +21,5 @@ const appSlice = createSlice({
   },
 });
 
-export const { checkScreenWidth } = appSlice.actions;
-export default appSlice.reducer;
+export const { checkScreenWidth } = navSlice.actions;
+export default navSlice.reducer;

@@ -4,7 +4,8 @@ import { useAppSelector, useAppDispatch } from "../../../Store/hooks";
 import { fetchProduct } from "../ProductCard/productCardSlice";
 import "./ProductDetail.scss";
 import * as stylex from "@stylexjs/stylex";
-import { Carousel } from "../..";
+import { Carousel, ProductCard } from "../..";
+import { motion } from "framer-motion";
 
 export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
@@ -46,8 +47,9 @@ export const ProductDetail: FC = () => {
       alignItems: isMobile ? null : "center",
     },
     productImage: {
-      width: "45%",
+      width: "100%",
       backgroundColor: "aqua",
+      margin: "0 5px",
       display: isMobile ? "flex" : null,
     },
     productImageTag: {
@@ -57,6 +59,11 @@ export const ProductDetail: FC = () => {
       height: "100%",
       width: isMobile ? "100%" : "50%",
       backgroundColor: "rgb(22, 116, 116)",
+    },
+    carouselWrap: {
+      width: "98%",
+      display: "flex",
+      justifyContent: "space-around",
     },
     ss: {
       color: isMobile ? "red" : "blue",
@@ -71,7 +78,7 @@ export const ProductDetail: FC = () => {
     }
   }, [product]);
   useEffect(() => {
-    console.log("Ravi");
+    console.log("Ravi", isMobile);
     window.scrollTo(0, 0);
     if (!product?._id || product._id !== id) {
       dispatch(fetchProduct(id || ""));
@@ -83,20 +90,19 @@ export const ProductDetail: FC = () => {
       <div {...stylex.props(styles.routeLink)}>{routeLinkText}</div>
       <div {...stylex.props(styles.productDetailContainer)}>
         {isMobile ? (
-          <Carousel>
-            <div {...stylex.props(styles.productImage)}>
-              {images.map((image, id) => (
-                <img
-                  {...stylex.props(styles.productImageTag)}
-                  src={image}
+          <Carousel >
+          {images.map((item, key) => (
+              <img
+              className="margin-provider"
+                  // {...stylex.props(styles.productImageTag)}
+                  src={item}
                   alt=""
                 />
-              ))}
-            </div>
-          </Carousel>
+          ))}
+        </Carousel>
         ) : (
           <div {...stylex.props(styles.productImage)}>
-            {images.map((image, id) => (
+            {images.map((image, key) => (
               <img
                 {...stylex.props(styles.productImageTag)}
                 src={image}

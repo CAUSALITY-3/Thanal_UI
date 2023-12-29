@@ -4,19 +4,23 @@ import menu from '../../assets/menu.svg'
 import close from '../../assets/close.svg'
 import logo from '../../assets/logo.svg'
 import './Navbar.scss'
+import { useAppDispatch } from '../../Store/hooks'
+import { checkScreenWidth } from './NavbarSlice'
 
 export const Navbar: FC = () => {
   const [toggleMenu, setToggleMenu] = useState(false)
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [screenWidth, setScreenWidth] = useState(0)
+  const dispatch = useAppDispatch();
+
+  const changeWidth = () => {
+    setScreenWidth(window.innerWidth);
+    dispatch(checkScreenWidth(window.innerWidth));
+  }
 
   useEffect(() => {
-
-    const changeWidth = () => {
-      setScreenWidth(window.innerWidth);
-    }
-
     window.addEventListener('resize', changeWidth)
-
+    setScreenWidth(window.innerWidth);
+    dispatch(checkScreenWidth(window.innerWidth))
     return () => {
       window.removeEventListener('resize', changeWidth)
     }

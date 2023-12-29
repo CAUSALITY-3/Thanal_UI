@@ -1,14 +1,13 @@
 .carousel{
-    width:97%;
-    height: 500px;
+    width:98%;
     background-color: rgb(174, 255, 255);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     overflow: hidden;
-    margin: 20px 0;
-    padding: 10px;
-    overflow-x: auto;
+    // margin: 20px 0;
+    // padding: 10px;
+    // overflow-x: auto;
     white-space: nowrap;
     
     .carousel-title{

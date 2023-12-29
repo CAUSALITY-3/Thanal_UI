@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import homeReducer from "../pages/Home/homeSlice";
 import productCardReducer from "../components/Product/ProductCard/productCardSlice";
-import AppReducer from "../AppSlice";
+import navReducer from "../components/Navbar/NavbarSlice";
 
 const store = configureStore({
   reducer: {
     home: homeReducer,
     product: productCardReducer,
-    app: AppReducer,
+    app: navReducer,
   },
 });
 

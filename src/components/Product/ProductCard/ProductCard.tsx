@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProductCard.scss";
 
@@ -13,11 +13,12 @@ interface Props {
 }
 
 export const ProductCard: FC<Props> = ({ props }) => {
+  const [isClick, setIsClick] = useState(false)
   const navigate = useNavigate();
   const linkTo = `/product/${props.productId}`;
 
   const handleClick = () => {
-    navigate({ pathname: linkTo });
+    isClick ? navigate({ pathname: linkTo }) : null;
   };
   let checkForDrag: number;
   const mouseDownCoords = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -26,7 +27,10 @@ export const ProductCard: FC<Props> = ({ props }) => {
   const clickOrDrag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const mouseUp = e.clientX;
     if (mouseUp < checkForDrag + 5 && mouseUp > checkForDrag - 5) {
+      setIsClick(true)
       console.log("hello");
+    } else {
+      setIsClick(false)
     }
   };
 
