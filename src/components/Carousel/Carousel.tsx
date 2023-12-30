@@ -14,7 +14,7 @@ export const Carousel: FC<Props> = ({ children, type }) => {
 
   useEffect(() => {
     if (carousel.current) {
-      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth+10);
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
     }
   },[children]);
 
@@ -23,7 +23,6 @@ export const Carousel: FC<Props> = ({ children, type }) => {
       <motion.div className="carousel">
         {type && <h1 className="carousel-title">{type}</h1>}
         <motion.div
-          // style={{ width: carousel?.current?.scrollWidth}}
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
           ref={carousel}

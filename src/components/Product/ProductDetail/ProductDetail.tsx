@@ -41,10 +41,11 @@ export const ProductDetail: FC = () => {
       height: "auto",
       backgroundColor: "rgb(172, 251, 225)",
       display: "flex",
-      justifyContent: "space-around",
+      justifyContent: "center",
+      alignItems:"center",
       flexFlow: isMobile ? null : "row wrap",
       flexDirection: isMobile ? "column" : null,
-      alignItems: isMobile ? null : "center",
+      // alignItems: isMobile ? null : "center",
     },
     productImage: {
       width: "100%",
@@ -64,6 +65,19 @@ export const ProductDetail: FC = () => {
       width: "98%",
       display: "flex",
       justifyContent: "space-around",
+    },
+    imagesdiv: {
+      display:"flex"
+    },
+    imageWrap:{
+      display: "flex"
+    },
+    image:{
+      width: "95vw",
+      height: "300px",
+      borderRadius: "5px",
+      margin:"10px 5px",
+      "-webkit-user-drag": "none"
     },
     ss: {
       color: isMobile ? "red" : "blue",
@@ -89,16 +103,23 @@ export const ProductDetail: FC = () => {
     <div {...stylex.props(styles.productDetail)}>
       <div {...stylex.props(styles.routeLink)}>{routeLinkText}</div>
       <div {...stylex.props(styles.productDetailContainer)}>
+        {/* <div {...stylex.props(styles.imagesdiv)}> */}
         {isMobile ? (
           <Carousel >
-          {images.map((item, key) => (
+            {images.map((item, key) => (
+              <div {...stylex.props(styles.imageWrap)}>
               <img
-              className="margin-provider"
+              {...stylex.props(styles.image)}
                   // {...stylex.props(styles.productImageTag)}
                   src={item}
                   alt=""
                 />
+              </div>
+              
           ))}
+          {/* </div> */}
+            {/* </div> */}
+          
         </Carousel>
         ) : (
           <div {...stylex.props(styles.productImage)}>
@@ -111,6 +132,8 @@ export const ProductDetail: FC = () => {
             ))}
           </div>
         )}
+        {/* </div> */}
+        
 
         <div {...stylex.props(styles.productDetails)}>
           <h2 onClick={() => console.log(window.innerWidth)}>{product.name}</h2>

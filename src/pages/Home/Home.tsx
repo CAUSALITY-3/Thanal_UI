@@ -27,11 +27,13 @@ const Home: FC = () => {
       <div className="sections">
         {mainData.map((item, key) => (
           <Carousel key={key} type={item.type}>
+            <div className="card-wrapper">
             {Object.values(item.data).map((item, key) => (
               <div className="margin-provider" key={key}>
                 <ProductCard props={item} />
               </div>
             ))}
+            </div>
           </Carousel>
         ))}
       </div>
