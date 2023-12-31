@@ -5,7 +5,7 @@ import { fetchProduct } from "../ProductCard/productCardSlice";
 import "./ProductDetail.scss";
 import * as stylex from "@stylexjs/stylex";
 import { Carousel, ProductCard } from "../..";
-import { motion } from "framer-motion";
+import { ImageSlider } from "../../ImageSlider/ImageSlider";
 
 export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
@@ -43,8 +43,8 @@ export const ProductDetail: FC = () => {
       display: "flex",
       justifyContent: "center",
       alignItems:"center",
-      flexFlow: isMobile ? null : "row wrap",
-      flexDirection: isMobile ? "column" : null,
+      // flexFlow: isMobile ? null : "row wrap",
+      flexDirection: isMobile ? "column" : "row",
       // alignItems: isMobile ? null : "center",
     },
     productImage: {
@@ -55,6 +55,7 @@ export const ProductDetail: FC = () => {
     },
     productImageTag: {
       width: "100%",
+      "-webkit-user-drag": "none"
     },
     productDetails: {
       height: "100%",
@@ -70,13 +71,15 @@ export const ProductDetail: FC = () => {
       display:"flex"
     },
     imageWrap:{
-      display: "flex"
+      display: "flex",
+      "scroll-snap-type": "x mandatory"
     },
     image:{
       width: "95vw",
       height: "300px",
       borderRadius: "5px",
       margin:"10px 5px",
+      "scroll-snap-align": "center",
       "-webkit-user-drag": "none"
     },
     ss: {
@@ -98,6 +101,11 @@ export const ProductDetail: FC = () => {
       dispatch(fetchProduct(id || ""));
     }
   }, []);
+
+  const containerStyles = {
+    width: "50vw",
+    height: "400px",
+  }
 
   return (
     <div {...stylex.props(styles.productDetail)}>
@@ -122,16 +130,22 @@ export const ProductDetail: FC = () => {
           
         </Carousel>
         ) : (
-          <div {...stylex.props(styles.productImage)}>
-            {images.map((image, key) => (
-              <img
-                {...stylex.props(styles.productImageTag)}
-                src={image}
-                alt=""
-              />
-            ))}
-          </div>
+          // <Carousel >
+          // <div {...stylex.props(styles.productImage)}>
+          //   {images.map((image, key) => (
+          //     <img
+          //       {...stylex.props(styles.productImageTag)}
+          //       src={image}
+          //       alt=""
+          //     />
+          //   ))}
+          // </div>
+          // </Carousel>
+          <div style={containerStyles}>
+        <ImageSlider slides={images} />
+      </div>
         )}
+        
         {/* </div> */}
         
 
