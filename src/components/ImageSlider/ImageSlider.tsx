@@ -38,39 +38,30 @@ interface Props {
         backgroundSize: "cover",
         backgroundPosition: "center",
       },
-      rightArrowStyles : mouseOn ? {
+      arrowStyles : mouseOn ? {
         position: "absolute",
         top: "50%",
-        right:0,
         transform: "translate(0, -50%)",
-        background: "linear-gradient(to right, transparent, gray)",
         height:"100%",
         "align-items": "center",
         "justify-content": "center",
         display: "flex",
-        width: "20%",
+        width: "15%",
         fontSize: "45px",
-        color: "#fff",
+        color: "#B5B5B5",
         zIndex: 1,
         cursor: "pointer",
         "user-select": "none"
       } : {display: "none" },
-      leftArrowStyles : mouseOn ? {
-        position: "absolute",
-        background: "linear-gradient(to left, transparent, gray)",
-        height:"100%",
-        top: "50%",
-        transform: "translate(0, -50%)",
-        "align-items": "center",
-        "justify-content": "center",
-        display: "flex",
-        width: "20%",
-        fontSize: "45px",
-        color: "#fff",
-        zIndex: 1,
-        cursor: "pointer",
-        "user-select": "none"
-      } : {display: "none" },
+      leftArrowStyles : {
+        background: "linear-gradient(to left, transparent, #141414)",
+        borderRadius: "10px 0 0 10px",
+    },
+    rightArrowStyles:{
+      right:0,
+      borderRadius: "0 10px 10px 0",
+      background: "linear-gradient(to right, transparent, #141414)",
+    },
       sliderStyles : {
         position: "relative",
         height: "100%",
@@ -97,10 +88,10 @@ interface Props {
   return (
     <div {...stylex.props(styles.sliderStyles)} onMouseEnter={()=>setMouseOn(true)} onMouseLeave={()=>setMouseOn(false)}>
       <div>
-        <div onClick={goToPrevious} {...stylex.props(styles.leftArrowStyles)}>
+        <div onClick={goToPrevious} {...stylex.props(styles.arrowStyles, styles.leftArrowStyles)}>
           ❰
         </div>
-        <div onClick={goToNext} {...stylex.props(styles.rightArrowStyles)}>
+        <div onClick={goToNext} {...stylex.props(styles.arrowStyles, styles.rightArrowStyles)}>
           ❱
         </div>
       </div>

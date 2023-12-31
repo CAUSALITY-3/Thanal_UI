@@ -26,17 +26,14 @@ export const ProductDetail: FC = () => {
       alignItems: "center",
       flexDirection: "column",
       width: "100%",
-      maxWidth: "1800px",
     },
     routeLink: {
       marginBottom: "10px",
       color: "rgb(88, 88, 88)",
       width: "100%",
-      maxWidth: "1444px",
     },
     productDetailContainer: {
-      maxWidth: "1444px",
-      width: "100%",
+      width: "98vw",
       borderRadius: "5px",
       height: "auto",
       backgroundColor: "rgb(172, 251, 225)",
