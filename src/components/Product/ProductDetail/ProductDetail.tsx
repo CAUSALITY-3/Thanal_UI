@@ -4,7 +4,6 @@ import { useAppSelector, useAppDispatch } from "../../../Store/hooks";
 import { fetchProduct } from "../ProductCard/productCardSlice";
 import "./ProductDetail.scss";
 import * as stylex from "@stylexjs/stylex";
-import { Carousel, ProductCard } from "../..";
 import { ImageSlider } from "../../ImageSlider/ImageSlider";
 
 export const ProductDetail: FC = () => {
@@ -39,7 +38,7 @@ export const ProductDetail: FC = () => {
       backgroundColor: "rgb(172, 251, 225)",
       display: "flex",
       justifyContent: "center",
-      alignItems:"center",
+      alignItems: "center",
       // flexFlow: isMobile ? null : "row wrap",
       flexDirection: isMobile ? "column" : "row",
       // alignItems: isMobile ? null : "center",
@@ -52,7 +51,7 @@ export const ProductDetail: FC = () => {
     },
     productImageTag: {
       width: "100%",
-      "-webkit-user-drag": "none"
+      "-webkit-user-drag": "none",
     },
     productDetails: {
       height: "100%",
@@ -65,19 +64,19 @@ export const ProductDetail: FC = () => {
       justifyContent: "space-around",
     },
     imagesdiv: {
-      display:"flex"
-    },
-    imageWrap:{
       display: "flex",
-      "scroll-snap-type": "x mandatory"
     },
-    image:{
+    imageWrap: {
+      display: "flex",
+      "scroll-snap-type": "x mandatory",
+    },
+    image: {
       width: "95vw",
       height: "300px",
       borderRadius: "5px",
-      margin:"10px 5px",
+      margin: "10px 5px",
       "scroll-snap-align": "center",
-      "-webkit-user-drag": "none"
+      "-webkit-user-drag": "none",
     },
     ss: {
       color: isMobile ? "red" : "blue",
@@ -101,51 +100,23 @@ export const ProductDetail: FC = () => {
 
   const containerStyles = {
     width: "50vw",
-    height: "400px",
-  }
+    height: "40vw",
+    maxHeight: "600px",
+    margin: "2em 0",
+  };
+  const containerStylesMobile = {
+    width: "97vw",
+    height: "60vh",
+    margin: "20px 0",
+  };
 
   return (
     <div {...stylex.props(styles.productDetail)}>
       <div {...stylex.props(styles.routeLink)}>{routeLinkText}</div>
       <div {...stylex.props(styles.productDetailContainer)}>
-        {/* <div {...stylex.props(styles.imagesdiv)}> */}
-        {isMobile ? (
-          <Carousel >
-            {images.map((item, key) => (
-              <div {...stylex.props(styles.imageWrap)}>
-              <img
-              {...stylex.props(styles.image)}
-                  // {...stylex.props(styles.productImageTag)}
-                  src={item}
-                  alt=""
-                />
-              </div>
-              
-          ))}
-          {/* </div> */}
-            {/* </div> */}
-          
-        </Carousel>
-        ) : (
-          // <Carousel >
-          // <div {...stylex.props(styles.productImage)}>
-          //   {images.map((image, key) => (
-          //     <img
-          //       {...stylex.props(styles.productImageTag)}
-          //       src={image}
-          //       alt=""
-          //     />
-          //   ))}
-          // </div>
-          // </Carousel>
-          <div style={containerStyles}>
-        <ImageSlider slides={images} />
-      </div>
-        )}
-        
-        {/* </div> */}
-        
-
+        <div style={isMobile ? containerStylesMobile : containerStyles}>
+          <ImageSlider slides={images} />
+        </div>
         <div {...stylex.props(styles.productDetails)}>
           <h2 onClick={() => console.log(window.innerWidth)}>{product.name}</h2>
           <h3 {...stylex.props(styles.ss)}>{product.description}</h3>
