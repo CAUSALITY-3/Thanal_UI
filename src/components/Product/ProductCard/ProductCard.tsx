@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./ProductCard.scss";
+import { Ratings } from "../../Ratings/Ratings";
 
 interface Props {
   props: {
@@ -9,6 +10,7 @@ interface Props {
     image: string;
     price: number;
     productId: string;
+    ratings: { average: number; count: number };
   };
 }
 
@@ -45,10 +47,10 @@ export const ProductCard: FC<Props> = ({ props }) => {
 
         <div className="product-details">
           <p className="product-name">{props.name}</p>
-          <p className="product-desc">{props.description}</p>
           <p className="product-price">
-            Rs. <span className="product-price-number">{props.price}</span>
+          ₹{props.price}
           </p>
+          <Ratings ratings={props.ratings} size="s"/>
         </div>
       </div>
   );

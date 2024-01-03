@@ -5,6 +5,7 @@ import { fetchProduct } from "../ProductCard/productCardSlice";
 import "./ProductDetail.scss";
 import * as stylex from "@stylexjs/stylex";
 import { ImageSlider } from "../../ImageSlider/ImageSlider";
+import { Ratings } from "../../Ratings/Ratings";
 
 export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
@@ -18,34 +19,37 @@ export const ProductDetail: FC = () => {
   const [images, setImages] = useState<string[]>([]);
 
   const styles = stylex.create({
+    productDetailOuter: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
     productDetail: {
-      backgroundColor: "red",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       flexDirection: "column",
-      width: "100%",
+      width: "95vw",
     },
     routeLink: {
-      marginBottom: "10px",
+      margin: "10px 0",
+      padding: "0 0 0 10px",
       color: "rgb(88, 88, 88)",
       width: "100%",
     },
     productDetailContainer: {
-      width: "98vw",
       borderRadius: "5px",
+      width:"100%",
       height: "auto",
-      backgroundColor: "rgb(172, 251, 225)",
+      background: "#e1f4e1",
       display: "flex",
-      justifyContent: "center",
+      justifyContent: isMobile ? "center" : "space-around",
       alignItems: "center",
-      // flexFlow: isMobile ? null : "row wrap",
       flexDirection: isMobile ? "column" : "row",
-      // alignItems: isMobile ? null : "center",
     },
     productImage: {
       width: "100%",
-      backgroundColor: "aqua",
       margin: "0 5px",
       display: isMobile ? "flex" : null,
     },
@@ -54,9 +58,9 @@ export const ProductDetail: FC = () => {
       "-webkit-user-drag": "none",
     },
     productDetails: {
-      height: "100%",
-      width: isMobile ? "100%" : "50%",
-      backgroundColor: "rgb(22, 116, 116)",
+      minHeight: isMobile ? "60vh" : "50vw",
+      // height: "100%",
+      width: isMobile ? "100%" : "45vw",
     },
     carouselWrap: {
       width: "98%",
@@ -78,9 +82,24 @@ export const ProductDetail: FC = () => {
       "scroll-snap-align": "center",
       "-webkit-user-drag": "none",
     },
-    ss: {
-      color: isMobile ? "red" : "blue",
-    },
+    imageSliderContainerStyles: isMobile
+      ? {
+          width: "97vw",
+          height: "60vh",
+          margin: "10px 0",
+        }
+      : {
+          width: "45vw",
+          height: "50vw",
+          maxHeight: "600px",
+          margin: "10px 0",
+        },
+    productName: {
+      color: "#232323",
+      fontSize: "x-large",
+      fontWeight: "bolder",
+      margin: "10px 0"
+    }
   });
 
   useEffect(() => {
@@ -98,32 +117,20 @@ export const ProductDetail: FC = () => {
     }
   }, []);
 
-  const containerStyles = {
-    width: "50vw",
-    height: "40vw",
-    maxHeight: "600px",
-    margin: "2em 0",
-  };
-  const containerStylesMobile = {
-    width: "97vw",
-    height: "60vh",
-    margin: "20px 0",
-  };
-
   return (
-    <div {...stylex.props(styles.productDetail)}>
-      <div {...stylex.props(styles.routeLink)}>{routeLinkText}</div>
-      <div {...stylex.props(styles.productDetailContainer)}>
-        <div style={isMobile ? containerStylesMobile : containerStyles}>
-          <ImageSlider slides={images} />
-        </div>
-        <div {...stylex.props(styles.productDetails)}>
-          <h2 onClick={() => console.log(window.innerWidth)}>{product.name}</h2>
-          <h3 {...stylex.props(styles.ss)}>{product.description}</h3>
-          <h3 {...stylex.props(styles.ss)}>
-            dhjkhddjdn d d jdjhjsjdbdsjnxsj jsmndjsmxndjsmx js mnjs nkmjkm jkj j
-            jikjvhvgv hghvg ghvjvyjnbvyjcdrtyjvc
-          </h3>
+    <div {...stylex.props(styles.productDetailOuter)}>
+      <div {...stylex.props(styles.productDetail)}>
+        <div {...stylex.props(styles.routeLink)}>{routeLinkText}</div>
+        <div {...stylex.props(styles.productDetailContainer)}>
+          <div {...stylex.props(styles.imageSliderContainerStyles)}>
+            <ImageSlider slides={images} />
+          </div>
+          <div {...stylex.props(styles.productDetails)}>
+            <div {...stylex.props(styles.productName)}>
+              {product.name}
+            </div>
+            <Ratings ratings={product.ratings} size="m"/>
+          </div>
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ type ProductData = {
   productId: string;
   priority: number;
   _id: string;
+  ratings: { average: number; count: number };
 };
 const initialState: InitialState = {
   loading: false,
@@ -30,6 +31,7 @@ const initialState: InitialState = {
     productId: "",
     priority: 0,
     _id: "",
+    ratings: { average: 5, count: 0 },
   },
   error: "",
 };

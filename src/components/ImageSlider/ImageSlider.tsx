@@ -1,9 +1,9 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import { useAppSelector } from "../../Store/hooks";
 
 interface Props {
-  slides: String[];
+  slides: string[];
 }
 
 export const ImageSlider: FC<Props> = ({ slides }) => {
