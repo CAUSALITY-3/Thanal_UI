@@ -129,7 +129,7 @@ export const ProductDetail: FC = () => {
             <div {...stylex.props(styles.productName)}>
               {product.name}
             </div>
-            <Ratings ratings={product.ratings} size="m"/>
+            <Ratings ratings={product.ratings} size="s"/>
           </div>
         </div>
       </div>

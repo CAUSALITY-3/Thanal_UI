@@ -50,7 +50,7 @@ export const ProductCard: FC<Props> = ({ props }) => {
           <p className="product-price">
           ₹{props.price}
           </p>
-          <Ratings ratings={props.ratings} size="s"/>
+          <Ratings ratings={props.ratings} size="s" type="star"/>
         </div>
       </div>
   );
