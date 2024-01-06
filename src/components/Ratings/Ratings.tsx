@@ -56,8 +56,9 @@ export const Ratings: FC<Props> = ({ ratings, size = "m", type }) => {
       color: "#ffd700",
     },
     stars: {
-      background:
-        "linear-gradient(to right, rgb(75, 175, 25) 79%, #CCCCCC 21%)",
+      background: `linear-gradient(to right, rgb(75, 175, 25) ${
+        +ratings.average * 20
+      }%, #CCCCCC ${100 - +ratings.average * 20}%)`,
       "-webkit-background-clip": "text",
       "-webkit-text-fill-color": "transparent",
       "padding-bottom": `${
@@ -71,7 +72,7 @@ export const Ratings: FC<Props> = ({ ratings, size = "m", type }) => {
   return (
     <div {...stylex.props(styles.ratingsContainer)}>
       {type === "star" ? (
-        < >
+        <>
           {/* <div {...stylex.props(styles.ratingCount)} style={{marginRight: "2px"}}>{ratings.average}</div> */}
           <div {...stylex.props(styles.stars)}>★★★★★</div>
           <div
