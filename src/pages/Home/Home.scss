@@ -9,7 +9,12 @@
         margin: 10px 0;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        // align-items: center;
+        background-color: rgb(174, 255, 255);
+        padding: 10px 0;
+        .carousel-title{
+            padding-left: 10px;
+        }
         .card-wrapper{
             display: flex;
         }

@@ -88,9 +88,9 @@ export const Ratings: FC<Props> = ({ ratings, size = "m", type }) => {
               fill="none"
               height={sizes[size].fontSize}
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               viewBox="0 0 24 24"
               width={sizes[size].fontSize}
               xmlns="http://www.w3.org/2000/svg"

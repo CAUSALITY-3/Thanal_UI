@@ -45,7 +45,6 @@ export const ProductDetail: FC = () => {
       background: "#e1f4e1",
       display: "flex",
       justifyContent: isMobile ? "center" : "space-around",
-      alignItems: "center",
       flexDirection: isMobile ? "column" : "row",
     },
     productImage: {
@@ -58,8 +57,6 @@ export const ProductDetail: FC = () => {
       "-webkit-user-drag": "none",
     },
     productDetails: {
-      // minHeight: isMobile ? "60vh" : "50vw",
-      // height: "100%",
       width: isMobile ? "100%" : "45vw",
     },
     carouselWrap: {
@@ -93,6 +90,8 @@ export const ProductDetail: FC = () => {
           height: "50vw",
           maxHeight: "600px",
           margin: "10px 0",
+          position: "sticky",
+          top: "5px",
         },
     productName: {
       color: "#232323",
