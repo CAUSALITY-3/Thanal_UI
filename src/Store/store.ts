@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     home: homeReducer,
     product: productCardReducer,
-    app: navReducer,
+    nav: navReducer,
   },
 });
 

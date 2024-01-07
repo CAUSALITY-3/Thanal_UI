@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const ImageSlider: FC<Props> = ({ slides }) => {
-  const isMobile = useAppSelector((state) => state.app.isMobile);
+  const isMobile = useAppSelector((state) => state.nav.isMobile);
 
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -94,14 +94,17 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
       position: "relative",
       height: "100%",
     },
-    dotsContainerStyles: mouseOn || isMobile ? {
-      position: "absolute",
-      bottom: "0px",
-      left:"50%",
-      right: "50%",
-      display: "flex",
-      justifyContent: "center",
-    } : {display: "none"},
+    dotsContainerStyles:
+      mouseOn || isMobile
+        ? {
+            position: "absolute",
+            bottom: "0px",
+            left: "50%",
+            right: "50%",
+            display: "flex",
+            justifyContent: "center",
+          }
+        : { display: "none" },
     dotStyle: {
       margin: "10px 3px",
       cursor: "pointer",

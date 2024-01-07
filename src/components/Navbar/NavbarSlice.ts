@@ -8,7 +8,7 @@ const initialState: InitialState = {
 };
 
 const navSlice = createSlice({
-  name: "app",
+  name: "nav",
   initialState,
   reducers: {
     checkScreenWidth: (state, action) => {

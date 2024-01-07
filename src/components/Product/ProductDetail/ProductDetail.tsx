@@ -10,7 +10,7 @@ import { Ratings } from "../../Ratings/Ratings";
 export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
   const loading = useAppSelector((state) => state.product.loading);
-  const isMobile = useAppSelector((state) => state.app.isMobile);
+  const isMobile = useAppSelector((state) => state.nav.isMobile);
   const routeLinkText = `Products > ${product.category || loading} > ${
     product.name || loading
   }`;
@@ -40,7 +40,7 @@ export const ProductDetail: FC = () => {
     },
     productDetailContainer: {
       borderRadius: "5px",
-      width:"100%",
+      width: "100%",
       height: "auto",
       background: "#e1f4e1",
       display: "flex",
@@ -58,7 +58,7 @@ export const ProductDetail: FC = () => {
       "-webkit-user-drag": "none",
     },
     productDetails: {
-      minHeight: isMobile ? "60vh" : "50vw",
+      // minHeight: isMobile ? "60vh" : "50vw",
       // height: "100%",
       width: isMobile ? "100%" : "45vw",
     },
@@ -98,8 +98,8 @@ export const ProductDetail: FC = () => {
       color: "#232323",
       fontSize: "x-large",
       fontWeight: "bolder",
-      margin: "10px 0"
-    }
+      margin: "10px 0",
+    },
   });
 
   useEffect(() => {
@@ -126,10 +126,8 @@ export const ProductDetail: FC = () => {
             <ImageSlider slides={images} />
           </div>
           <div {...stylex.props(styles.productDetails)}>
-            <div {...stylex.props(styles.productName)}>
-              {product.name}
-            </div>
-            <Ratings ratings={product.ratings} size="s"/>
+            <div {...stylex.props(styles.productName)}>{product.name}</div>
+            <Ratings ratings={product.ratings} size="s" />
           </div>
         </div>
       </div>

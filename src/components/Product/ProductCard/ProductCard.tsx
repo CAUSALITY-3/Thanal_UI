@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const ProductCard: FC<Props> = ({ props }) => {
-  const [isClick, setIsClick] = useState(false)
+  const [isClick, setIsClick] = useState(false);
   const navigate = useNavigate();
   const linkTo = `/product/${props.productId}`;
 
@@ -29,30 +29,27 @@ export const ProductCard: FC<Props> = ({ props }) => {
   const clickOrDrag = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const mouseUp = e.clientX;
     if (mouseUp < checkForDrag + 5 && mouseUp > checkForDrag - 5) {
-      setIsClick(true)
+      setIsClick(true);
       console.log("hello");
     } else {
-      setIsClick(false)
+      setIsClick(false);
     }
   };
 
   return (
-      <div
-        className="poduct-box"
-        onMouseDown={(e) => mouseDownCoords(e)}
-        onMouseUp={(e) => clickOrDrag(e)}
-        onClick={handleClick}
-      >
-        <img className="card-image" src={props.image}></img>
+    <div
+      className="poduct-box"
+      onMouseDown={(e) => mouseDownCoords(e)}
+      onMouseUp={(e) => clickOrDrag(e)}
+      onClick={handleClick}
+    >
+      <img className="card-image" src={props.image}></img>
 
-        <div className="product-details">
-          <p className="product-name">{props.name}</p>
-          <p className="product-price">
-          ₹{props.price}
-          </p>
-          <Ratings ratings={props.ratings} size="s" type="star"/>
-        </div>
+      <div className="product-details">
+        <p className="product-name">{props.name}</p>
+        <p className="product-price">₹{props.price}</p>
+        <Ratings ratings={props.ratings} size="s" type="star" />
       </div>
+    </div>
   );
 };
-

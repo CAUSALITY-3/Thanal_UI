@@ -16,7 +16,7 @@ export const Carousel: FC<Props> = ({ children, type }) => {
     if (carousel.current) {
       setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
     }
-  },[children]);
+  }, [children]);
 
   return (
     <>
