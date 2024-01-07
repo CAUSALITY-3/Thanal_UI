@@ -28,15 +28,18 @@ const Home: FC = () => {
       </div>
       <div className="sections">
         {mainData.map((item, key) => (
-          <Carousel key={key} type={item.type}>
-            <div className="card-wrapper">
-              {Object.values(item.data).map((item, key) => (
-                <div className="margin-provider" key={key}>
-                  <ProductCard props={item} />
-                </div>
-              ))}
-            </div>
-          </Carousel>
+          <>
+            <h1 className="carousel-title">{item.type}</h1>
+            <Carousel key={key}>
+              <div className="card-wrapper">
+                {Object.values(item.data).map((item, key) => (
+                  <div className="margin-provider" key={key}>
+                    <ProductCard props={item} />
+                  </div>
+                ))}
+              </div>
+            </Carousel>
+          </>
         ))}
       </div>
     </div>

@@ -8,7 +8,7 @@ interface Props {
   type?: string;
 }
 
-export const Carousel: FC<Props> = ({ children, type }) => {
+export const Carousel: FC<Props> = ({ children }) => {
   const [width, setWidth] = useState(0);
   const carousel = useRef<HTMLDivElement>(null);
 
@@ -21,7 +21,6 @@ export const Carousel: FC<Props> = ({ children, type }) => {
   return (
     <>
       <motion.div className="carousel">
-        {type && <h1 className="carousel-title">{type}</h1>}
         <motion.div
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
