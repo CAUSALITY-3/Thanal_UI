@@ -81,7 +81,6 @@ export const ProductDetail: FC = () => {
     },
     imageSliderContainerStyles: isMobile
       ? {
-          width: "97vw",
           height: "60vh",
           margin: "10px 0",
         }
