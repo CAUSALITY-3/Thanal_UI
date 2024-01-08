@@ -86,10 +86,10 @@ export const ProductDetail: FC = () => {
           margin: "10px 0",
         }
       : {
-          width: "45vw",
+          width: "40vw",
           height: "50vw",
           maxHeight: "600px",
-          margin: "10px 0",
+          margin: "10px 0 0 0",
           position: "sticky",
           top: "5px",
         },
@@ -126,7 +126,7 @@ export const ProductDetail: FC = () => {
           </div>
           <div {...stylex.props(styles.productDetails)}>
             <div {...stylex.props(styles.productName)}>{product.name}</div>
-            <Ratings ratings={product.ratings} size="s" />
+            <Ratings ratings={product.ratings} size="m" />
           </div>
         </div>
       </div>

@@ -12,7 +12,6 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [mouseOn, setMouseOn] = useState(false);
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
@@ -56,62 +55,26 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
   };
 
   const styles = stylex.create({
-    slideStyles: {
-      width: "100%",
-      height: "100%",
-      borderRadius: "10px",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    },
-    arrowStyles:
-      mouseOn && slides.length > 1
-        ? {
-            position: "absolute",
-            top: "50%",
-            transform: "translate(0, -50%)",
-            height: "100%",
-            "align-items": "center",
-            "justify-content": "center",
-            display: "flex",
-            width: "15%",
-            fontSize: "45px",
-            color: "#B5B5B5",
-            zIndex: 1,
-            cursor: "pointer",
-            "user-select": "none",
-          }
-        : { display: "none" },
-    leftArrowStyles: {
-      background: "linear-gradient(to left, transparent, #141414)",
-      borderRadius: "10px 0 0 10px",
-    },
-    rightArrowStyles: {
-      right: 0,
-      borderRadius: "0 10px 10px 0",
-      background: "linear-gradient(to right, transparent, #141414)",
-    },
     sliderStyles: {
       position: "relative",
-      height: "100%",
+      height: isMobile ? "100%" : "85%",
     },
-    dotsContainerStyles:
-      mouseOn || isMobile
-        ? {
-            position: "absolute",
-            bottom: "0px",
-            left: "50%",
-            right: "50%",
-            display: "flex",
-            justifyContent: "center",
-          }
-        : { display: "none" },
+    dotsContainerStyles: {
+      position: "absolute",
+      bottom: "0px",
+      left: "50%",
+      right: "50%",
+      display: "flex",
+      justifyContent: "center",
+    },
     dotStyle: {
       margin: "10px 3px",
       cursor: "pointer",
       fontSize: "20px",
+      color: "white",
     },
     dotStyleSelect: {
-      color: "white",
+      color: "green",
     },
     slideStylesWidthBackground: {
       width: "100%",
@@ -121,48 +84,79 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
       backgroundPosition: "center",
       backgroundImage: `url(${slides[currentIndex]})`,
     },
+    imageTemplateContainer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: "15%",
+    },
+    imageTemplateBox: {
+      width: "50px",
+      height: "50px",
+      borderRadius: "2px",
+      border: "1px solid green",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      margin: "0 10px",
+    },
+    imageTemplateBoxActive: {
+      border: "2px solid green",
+    },
+    templateImage: {
+      height: "90%",
+      width: "90%",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    },
   });
 
   return (
-    <div
-      {...stylex.props(styles.sliderStyles)}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
-      onMouseEnter={() => (!isMobile ? setMouseOn(true) : null)}
-      onMouseLeave={() => (!isMobile ? setMouseOn(false) : null)}
-    >
-      {!isMobile ? (
-        <div>
-          <div
-            onClick={goToPrevious}
-            {...stylex.props(styles.arrowStyles, styles.leftArrowStyles)}
-          >
-            ❰
+    <>
+      <div
+        {...stylex.props(styles.sliderStyles)}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
+        <div {...stylex.props(styles.slideStylesWidthBackground)}></div>
+        {isMobile && (
+          <div {...stylex.props(styles.dotsContainerStyles)}>
+            {slides.map((slide, slideIndex: number) => (
+              <div
+                {...stylex.props(
+                  styles.dotStyle,
+                  currentIndex === slideIndex ? styles.dotStyleSelect : null
+                )}
+                key={slideIndex}
+                onClick={() => goToSlide(slideIndex)}
+              >
+                ●
+              </div>
+            ))}
           </div>
-          <div
-            onClick={goToNext}
-            {...stylex.props(styles.arrowStyles, styles.rightArrowStyles)}
-          >
-            ❱
-          </div>
-        </div>
-      ) : null}
-      <div {...stylex.props(styles.slideStylesWidthBackground)}></div>
-      <div {...stylex.props(styles.dotsContainerStyles)}>
-        {slides.map((slide, slideIndex: number) => (
-          <div
-            {...stylex.props(
-              styles.dotStyle,
-              currentIndex === slideIndex ? styles.dotStyleSelect : null
-            )}
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-          >
-            ●
-          </div>
-        ))}
+        )}
       </div>
-    </div>
+      {!isMobile && (
+        <div {...stylex.props(styles.imageTemplateContainer)}>
+          {slides.map((slide, slideIndex: number) => (
+            <div
+              {...stylex.props(
+                styles.imageTemplateBox,
+                slideIndex === currentIndex
+                  ? styles.imageTemplateBoxActive
+                  : null
+              )}
+              onMouseOver={() => setCurrentIndex(slideIndex)}
+            >
+              <div
+                {...stylex.props(styles.templateImage)}
+                style={{ backgroundImage: `url(${slide})` }}
+              ></div>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
