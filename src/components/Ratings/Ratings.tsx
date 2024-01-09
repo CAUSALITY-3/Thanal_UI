@@ -9,9 +9,10 @@ interface Props {
   ratings: Ratings;
   size?: "s" | "m" | "l";
   type?: "star" | undefined;
+  reviewCount?: number | undefined;
 }
 
-export const Ratings: FC<Props> = ({ ratings, size = "m", type }) => {
+export const Ratings: FC<Props> = ({ ratings, size = "m", type, reviewCount }) => {
   const sizes = {
     s: {
       fontSize: "12px",
@@ -99,7 +100,7 @@ export const Ratings: FC<Props> = ({ ratings, size = "m", type }) => {
             </svg>
           </div>
           <div {...stylex.props(styles.ratingCount)}>
-            {ratings.count} ratings
+            {ratings.count} ratings{reviewCount !== undefined ? ` & ${reviewCount} reviews` : ''}
           </div>
         </>
       )}

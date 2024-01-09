@@ -6,6 +6,7 @@ import "./ProductDetail.scss";
 import * as stylex from "@stylexjs/stylex";
 import { ImageSlider } from "../../ImageSlider/ImageSlider";
 import { Ratings } from "../../Ratings/Ratings";
+import { ProductFeatures } from "../../ProductFeatures/ProductFeatures";
 
 export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
@@ -125,7 +126,8 @@ export const ProductDetail: FC = () => {
           </div>
           <div {...stylex.props(styles.productDetails)}>
             <div {...stylex.props(styles.productName)}>{product.name}</div>
-            <Ratings ratings={product.ratings} size="m" />
+            <Ratings ratings={product.ratings} size="m" reviewCount={product?.reviews?.length} />
+            <ProductFeatures features={product.features}/>
           </div>
         </div>
       </div>

@@ -18,6 +18,8 @@ type ProductData = {
   priority: number;
   _id: string;
   ratings: { average: number; count: number };
+  features: { type: string, value: string }[];
+  reviews: {customer : string, rating: number, comment: string, reviewDate: string }[];
 };
 const initialState: InitialState = {
   loading: false,
@@ -32,6 +34,8 @@ const initialState: InitialState = {
     priority: 0,
     _id: "",
     ratings: { average: 5, count: 0 },
+    features: [],
+    reviews:[]
   },
   error: "",
 };
@@ -41,7 +45,7 @@ export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
   async (id: string) => {
     const res = await axios.get(
-      `http://localhost:5000/products/product?id=${id}`
+      `${import.meta.env.VITE_THANAL_API_BASE_URL}/products/product?id=${id}`
     );
     return res.data;
   }

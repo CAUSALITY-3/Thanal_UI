@@ -30,8 +30,9 @@ export const fetchProducts = createAsyncThunk(
   "product/fetchProducts",
   async () => {
     const res = await axios.get(
-      "http://localhost:5000/products/productMainList"
+      `${import.meta.env.VITE_THANAL_API_BASE_URL}/products/productMainList`
     );
+    console.log(import.meta.env.VITE_THANAL_API_BASE_URL)
     return res.data;
   }
 );
