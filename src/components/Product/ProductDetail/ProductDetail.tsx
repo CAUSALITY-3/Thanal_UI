@@ -99,6 +99,9 @@ export const ProductDetail: FC = () => {
       fontWeight: "bolder",
       margin: "10px 0",
     },
+    featureContainer:{
+      margin: "30px 0"
+    }
   });
 
   useEffect(() => {
@@ -126,8 +129,14 @@ export const ProductDetail: FC = () => {
           </div>
           <div {...stylex.props(styles.productDetails)}>
             <div {...stylex.props(styles.productName)}>{product.name}</div>
-            <Ratings ratings={product.ratings} size="m" reviewCount={product?.reviews?.length} />
-            <ProductFeatures features={product.features}/>
+            <Ratings
+              ratings={product.ratings}
+              size="m"
+              reviewCount={product?.reviews?.length}
+            />
+            <div {...stylex.props(styles.featureContainer)}>
+              <ProductFeatures features={product.features} />
+            </div>
           </div>
         </div>
       </div>
