@@ -7,6 +7,7 @@ import * as stylex from "@stylexjs/stylex";
 import { ImageSlider } from "../../ImageSlider/ImageSlider";
 import { Ratings } from "../../Ratings/Ratings";
 import { ProductFeatures } from "../../ProductFeatures/ProductFeatures";
+import { BuyOrAdd } from "../../BuyOrAdd/BuyOrAdd";
 
 export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
@@ -32,6 +33,7 @@ export const ProductDetail: FC = () => {
       alignItems: "center",
       flexDirection: "column",
       width: "95vw",
+      maxWidth: "1444px",
     },
     routeLink: {
       margin: "10px 0",
@@ -99,9 +101,45 @@ export const ProductDetail: FC = () => {
       fontWeight: "bolder",
       margin: "10px 0",
     },
-    featureContainer:{
-      margin: "30px 0"
-    }
+    featureContainer: {
+      margin: "30px 0",
+    },
+    descriptionContainer: {
+      display: "flex",
+      flexDirection: "column",
+      margin: "10px 0",
+      paddingRight: "10px",
+    },
+    descriptionTitle: {
+      fontWeight: "bold",
+      marginBottom: "5px",
+    },
+    description: {
+      display: "-webkit-box",
+      "-webkit-line-clamp": "2",
+      "-webkit-box-orient": "vertical",
+      overflow: "hidden",
+      "text-align": "justify",
+      ":hover": {
+        display: "flex",
+        color: "rgba(0,0,0,0.8)",
+      },
+    },
+    buyOrAdd: isMobile
+      ? {
+          position: "sticky",
+          bottom: "0px",
+          left: "0px",
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "5px, 0",
+          background: "white",
+        }
+      : {
+          margin: "10px 0",
+        },
   });
 
   useEffect(() => {
@@ -136,6 +174,18 @@ export const ProductDetail: FC = () => {
             />
             <div {...stylex.props(styles.featureContainer)}>
               <ProductFeatures features={product.features} />
+            </div>
+            <div {...stylex.props(styles.descriptionContainer)}>
+              <div {...stylex.props(styles.descriptionTitle)}>Description</div>
+              <div {...stylex.props(styles.description)}>
+                {product.description}
+              </div>
+            </div>
+            <div style={{ marginBottom: "40px" }}>
+              Available Quantity: {product.stock}
+            </div>
+            <div {...stylex.props(styles.buyOrAdd)}>
+              <BuyOrAdd />
             </div>
           </div>
         </div>

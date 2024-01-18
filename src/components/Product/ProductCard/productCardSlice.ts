@@ -18,8 +18,14 @@ type ProductData = {
   priority: number;
   _id: string;
   ratings: { average: number; count: number };
-  features: { type: string, value: string }[];
-  reviews: {customer : string, rating: number, comment: string, reviewDate: string }[];
+  features: { type: string; value: string }[];
+  reviews: {
+    customer: string;
+    rating: number;
+    comment: string;
+    reviewDate: string;
+  }[];
+  stock: number;
 };
 const initialState: InitialState = {
   loading: false,
@@ -35,7 +41,8 @@ const initialState: InitialState = {
     _id: "",
     ratings: { average: 5, count: 0 },
     features: [],
-    reviews:[]
+    reviews: [],
+    stock: 0,
   },
   error: "",
 };
