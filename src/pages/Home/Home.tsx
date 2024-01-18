@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { ProductCard, Carousel } from "../../components";
 import { useAppSelector, useAppDispatch } from "../../Store/hooks";
 import { fetchProducts } from "./homeSlice";

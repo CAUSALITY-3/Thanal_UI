@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import menu from '../../assets/menu.svg'
 import close from '../../assets/close.svg'

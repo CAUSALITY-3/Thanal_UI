@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import { useAppSelector } from "../../Store/hooks";
 
@@ -128,7 +128,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
                   styles.dotStyle,
                   currentIndex === slideIndex ? styles.dotStyleSelect : null
                 )}
-                key={slideIndex}
+                key={slide}
                 onClick={() => goToSlide(slideIndex)}
               >
                 ●

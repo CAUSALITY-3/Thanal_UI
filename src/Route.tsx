@@ -1,6 +1,6 @@
 
 import Home from './pages/Home/Home'
-import { useRoutes, useParams } from 'react-router-dom'
+import { useRoutes } from 'react-router-dom'
 import { Login, Products, Contact } from './pages'
 import { ProductDetail } from './components/Product/ProductDetail/ProductDetail'
 

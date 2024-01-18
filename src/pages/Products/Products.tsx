@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import "./Product.scss";
 
 const Products: FC = () => {
@@ -16,10 +16,6 @@ const Products: FC = () => {
   >([]);
 
   useEffect(() => {
-    const fetchdata = async () => {
-      const res = await fetch("http://localhost:5000/products");
-      console.log(res);
-    };
     fetch("http://localhost:5000/products")
       .then((response) => response.json())
       .then(

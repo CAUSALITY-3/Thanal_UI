@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import * as stylex from "@stylexjs/stylex";
 
 interface Feature {
@@ -41,7 +41,7 @@ export const ProductFeatures: FC<Props> = ({ features }) => {
   });
   return (
     <div {...stylex.props(styles.featureContainer)}>
-      {features.map((feature, index) => (
+      {features.map((feature) => (
         <>
           {feature.type === "color" ? (
             <div {...stylex.props(styles.colorContainer)}>
