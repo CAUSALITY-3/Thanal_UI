@@ -55,9 +55,14 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
   };
 
   const styles = stylex.create({
+    mainContainer: {
+      display: "flex",
+      height: isMobile ? "100%" : "100%",
+      maxHeight: "60vh",
+    },
     sliderStyles: {
+      width: "100%",
       position: "relative",
-      height: isMobile ? "100%" : "85%",
     },
     dotsContainerStyles: {
       position: "absolute",
@@ -87,8 +92,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
     imageTemplateContainer: {
       display: "flex",
       alignItems: "center",
-      justifyContent: "center",
-      height: "15%",
+      flexDirection: "column",
     },
     imageTemplateBox: {
       width: "50px",
@@ -98,7 +102,7 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      margin: "0 10px",
+      margin: "2px 5px",
     },
     imageTemplateBoxActive: {
       border: "2px solid green",
@@ -112,7 +116,27 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
   });
 
   return (
-    <>
+    <div {...stylex.props(styles.mainContainer)}>
+      {!isMobile && (
+        <div {...stylex.props(styles.imageTemplateContainer)}>
+          {slides.map((slide, slideIndex: number) => (
+            <div
+              {...stylex.props(
+                styles.imageTemplateBox,
+                slideIndex === currentIndex
+                  ? styles.imageTemplateBoxActive
+                  : null
+              )}
+              onMouseOver={() => setCurrentIndex(slideIndex)}
+            >
+              <div
+                {...stylex.props(styles.templateImage)}
+                style={{ backgroundImage: `url(${slide})` }}
+              ></div>
+            </div>
+          ))}
+        </div>
+      )}
       <div
         {...stylex.props(styles.sliderStyles)}
         onTouchStart={onTouchStart}
@@ -137,26 +161,6 @@ export const ImageSlider: FC<Props> = ({ slides }) => {
           </div>
         )}
       </div>
-      {!isMobile && (
-        <div {...stylex.props(styles.imageTemplateContainer)}>
-          {slides.map((slide, slideIndex: number) => (
-            <div
-              {...stylex.props(
-                styles.imageTemplateBox,
-                slideIndex === currentIndex
-                  ? styles.imageTemplateBoxActive
-                  : null
-              )}
-              onMouseOver={() => setCurrentIndex(slideIndex)}
-            >
-              <div
-                {...stylex.props(styles.templateImage)}
-                style={{ backgroundImage: `url(${slide})` }}
-              ></div>
-            </div>
-          ))}
-        </div>
-      )}
-    </>
+    </div>
   );
 };

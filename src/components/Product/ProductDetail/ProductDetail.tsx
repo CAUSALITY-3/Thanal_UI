@@ -60,7 +60,7 @@ export const ProductDetail: FC = () => {
       "-webkit-user-drag": "none",
     },
     productDetails: {
-      width: isMobile ? "100%" : "45vw",
+      width: isMobile ? "100%" : "40vw",
     },
     carouselWrap: {
       width: "98%",
@@ -82,18 +82,22 @@ export const ProductDetail: FC = () => {
       "scroll-snap-align": "center",
       "-webkit-user-drag": "none",
     },
+    productImageSection: !isMobile
+      ? {
+          margin: "10px 0 0 0",
+          position: "sticky",
+          top: "5px",
+        }
+      : {},
     imageSliderContainerStyles: isMobile
       ? {
           height: "60vh",
           margin: "10px 0",
         }
       : {
-          width: "40vw",
-          height: "50vw",
-          maxHeight: "600px",
-          margin: "10px 0 0 0",
-          position: "sticky",
-          top: "5px",
+          width: "45vw",
+          height: "45vw",
+          maxHeight: "60vh",
         },
     productName: {
       color: "#232323",
@@ -125,21 +129,20 @@ export const ProductDetail: FC = () => {
         color: "rgba(0,0,0,0.8)",
       },
     },
-    buyOrAdd: isMobile
-      ? {
-          position: "sticky",
-          bottom: "0px",
-          left: "0px",
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding: "5px, 0",
-          background: "white",
-        }
-      : {
-          margin: "10px 0",
-        },
+    buyOrAddMobile: {
+      position: "sticky",
+      bottom: "0px",
+      left: "0px",
+      width: "100%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: "5px, 0",
+      background: "white",
+    },
+    buyOrAdd: {
+      margin: "20px 0",
+    },
   });
 
   useEffect(() => {
@@ -162,8 +165,16 @@ export const ProductDetail: FC = () => {
       <div {...stylex.props(styles.productDetail)}>
         <div {...stylex.props(styles.routeLink)}>{routeLinkText}</div>
         <div {...stylex.props(styles.productDetailContainer)}>
-          <div {...stylex.props(styles.imageSliderContainerStyles)}>
-            <ImageSlider slides={images} />
+          <div {...stylex.props(styles.productImageSection)}>
+            <div {...stylex.props(styles.imageSliderContainerStyles)}>
+              <ImageSlider slides={images} />
+            </div>
+
+            {!isMobile && (
+              <div {...stylex.props(styles.buyOrAdd)}>
+                <BuyOrAdd />
+              </div>
+            )}
           </div>
           <div {...stylex.props(styles.productDetails)}>
             <div {...stylex.props(styles.productName)}>{product.name}</div>
@@ -184,9 +195,11 @@ export const ProductDetail: FC = () => {
             <div style={{ marginBottom: "40px" }}>
               Available Quantity: {product.stock}
             </div>
-            <div {...stylex.props(styles.buyOrAdd)}>
-              <BuyOrAdd />
-            </div>
+            {isMobile && (
+              <div {...stylex.props(styles.buyOrAddMobile)}>
+                <BuyOrAdd />
+              </div>
+            )}
           </div>
         </div>
       </div>
