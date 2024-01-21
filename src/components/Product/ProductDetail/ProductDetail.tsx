@@ -13,9 +13,7 @@ export const ProductDetail: FC = () => {
   const product = useAppSelector((state) => state.product.productData);
   const loading = useAppSelector((state) => state.product.loading);
   const isMobile = useAppSelector((state) => state.nav.isMobile);
-  const routeLinkText = `Products > ${product.category || loading} > ${
-    product.name || loading
-  }`;
+  const routeLinkText = `Products > ${product.category || loading} > ${product.name || loading}`;
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const [images, setImages] = useState<string[]>([]);

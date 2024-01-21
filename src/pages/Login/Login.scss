@@ -1,0 +1,61 @@
+.joinpage-container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: darkmagenta;
+    align-items: center;
+    .joinpage-center-div{
+        .joinpage-h1-div{
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            background-color: aliceblue;
+            .joinpage-h1{
+                color: burlywood;
+            }
+        }
+        .joinpage-form{
+            height: 30vh;
+            width: 25vw;
+            min-width: 250px;
+            background-color: aqua;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            .joinpage-form-content{
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                .joinpage-form-name-room{
+                    width: 70%;
+                    height: 40%;
+                    font-size: 18px;
+                    padding: 10px;
+                    margin: 10px;
+                    background: papayawhip;
+                    border: none;
+                    border-radius: 3px;
+                    ::placeholder {
+                        color: palevioletred;
+                    }
+                }
+                .joinpage-form-button{
+                    color: palevioletred;
+                    font-size: 1.25em;
+                    padding: 0.5em 1.5em;
+                    border: 2px solid palevioletred;
+                    border-radius: 3px;
+                    &:hover{
+                        background-color: palevioletred;
+                        color: beige;
+                        border: 2px solid beige;
+                    }
+                }
+            }
+            
+        }
+    }
+    
+}
