@@ -1,7 +1,7 @@
 
 import Home from './pages/Home/Home'
 import { useRoutes } from 'react-router-dom'
-import { Login, Products, Contact } from './pages'
+import { Login, SignUp, Products, Contact } from './pages'
 import { ProductDetail } from './components/Product/ProductDetail/ProductDetail'
 
 const Route = () => {
@@ -12,7 +12,11 @@ const Route = () => {
             element: <Login />,
         },
         {
-            path: "/Products",
+            path: "/SignUp*",
+            element: <SignUp />,
+        },
+        {
+            path: "/Products/*",
             element: <Products />,
         },
         {
@@ -20,7 +24,7 @@ const Route = () => {
             element: <ProductDetail/>
         },
         {
-            path: "/Contact",
+            path: "/Contact/*",
             element: <Contact />,
         },
         {

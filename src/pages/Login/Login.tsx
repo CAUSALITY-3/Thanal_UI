@@ -1,7 +1,6 @@
 import { FC } from "react";
 import "./Login.scss";
 import * as stylex from "@stylexjs/stylex";
-import { Button } from "../../components/Buttons/Button";
 import googleIcon from "../../assets/google_icon.svg";
 import { useAppSelector } from "../../Store/hooks";
 
@@ -53,7 +52,6 @@ const Login: FC = () => {
     <>
       <div {...stylex.props(styles.loginOuterDiv)}>
         <div {...stylex.props(styles.loginContainer)}>
-          <div {...stylex.props(styles.steps)}>Step 1 of 2</div>
           <div {...stylex.props(styles.loginWithhGooleButton)}>
             <div {...stylex.props(styles.loginWithhGooleText)}>
               Login with Google
