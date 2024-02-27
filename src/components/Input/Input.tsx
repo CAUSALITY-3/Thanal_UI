@@ -14,11 +14,24 @@ interface FormData {
   required: boolean;
   invalid: boolean;
   message: string;
+  type: string;
+  dropDownValues?: string[];
+  disabled?: boolean;
 }
 
 export const Input: FC<Props> = ({ formData, setFormData }) => {
-  const { label, key, value, message, required, invalid, validation } =
-    formData;
+  const {
+    label,
+    key,
+    value,
+    message,
+    required,
+    invalid,
+    validation,
+    disabled,
+    type,
+    dropDownValues,
+  } = formData;
 
   const handleChange = (fieldName: string, inputValue: string) => {
     if ("phone pincode".includes(fieldName)) {
@@ -78,7 +91,9 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
       marginTop: "3px",
     },
     formInput: {
-      width: "90%",
+      cursor: disabled ? "not-allowed" : "auto",
+      padding: "0 10px",
+      width: "90hw",
       height: "35px",
       marginTop: "8px",
       background: "rgba(0, 0, 0, .03)",
@@ -101,13 +116,27 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
         {required && <span style={{ color: "#F08080" }}>*</span>}
       </label>
       {invalid && <p {...stylex.props(styles.formInvalidMessage)}>{message}</p>}
-      <input
-        {...stylex.props(styles.formInput)}
-        type="text"
-        value={value}
-        onBlur={(e) => handleBlur(key, e.target.value)}
-        onChange={(e) => handleChange(key, e.target.value)}
-      />
+      {type === "input" ? (
+        <input
+          {...stylex.props(styles.formInput)}
+          type="text"
+          disabled={disabled}
+          value={value}
+          onBlur={(e) => handleBlur(key, e.target.value)}
+          onChange={(e) => handleChange(key, e.target.value)}
+        />
+      ) : (
+        <select
+          value={value}
+          {...stylex.props(styles.formInput)}
+          onChange={(e) => handleChange(key, e.target.value)}
+        > {
+          dropDownValues?.map(drop=>(
+            <option value={drop}>{drop}</option>
+          ))
+        }
+        </select>
+      )}
     </div>
   );
 };

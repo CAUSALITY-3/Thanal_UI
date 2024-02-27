@@ -49,51 +49,21 @@ const Login: FC = () => {
       height: "18px",
     },
   });
-  const [formData, setFormData] = useState({
-    name: {
-      required: true,
-      label: "Name",
-      key: "name",
-      value: "",
-      invalid: false,
-      validation: [(value:string)=>value.length > 2 && value.length < 20],
-      message: "Please provide valid name."
-    
-  },
-  phone: {
-    label: "Phone (+91)",
-    key: "phone",
-    value: "",
-    required: false,
-    invalid: false,
-    validation: [(value:string)=>value.length === 10],
-    message: "Please provide valid 10 digit phone number."
-  
-},
-});
 
   return (
     <>
       <div {...stylex.props(styles.loginOuterDiv)}>
         <div {...stylex.props(styles.loginContainer)}>
           <div {...stylex.props(styles.loginWithhGooleButton)}>
-            <div onClick={()=>console.log(formData)} {...stylex.props(styles.loginWithhGooleText)}>
+            <div {...stylex.props(styles.loginWithhGooleText)}>
               Login/SingnUp with Google
             </div>
-            
-            
-
             <img
               {...stylex.props(styles.loginWithhGooleIcon)}
               src={googleIcon}
               alt=""
             />
           </div>
-          {
-              Object.values(formData).map(data=>(
-                <Input formData={data} setFormData = {setFormData} />
-              ))
-            }
         </div>
       </div>
     </>

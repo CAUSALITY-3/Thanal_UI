@@ -4,129 +4,161 @@ import googleIcon from "../../assets/google_icon.svg";
 import { useAppSelector } from "../../Store/hooks";
 import { useSearchParams } from "react-router-dom";
 import { Button } from "../../components/Buttons/Button";
+import { Input } from "../../components/Input/Input";
 
 const SignUp: FC = () => {
   const [searchParams] = useSearchParams();
   const step = searchParams.get("step") || 1;
   const isMobile = useAppSelector((state) => state.nav.isMobile);
-  
 
-  const [submit, setSubmit] = useState(false)
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    house: "",
-    village: "",
-    landmark: "",
-    city: "",
-    state: "",
-    pincode: ""
-  });
-
-  const [checkForm, setCheckForm] = useState<any>({
-    name: "",
-    phone: "",
-    house: "",
-    village: "",
-    landmark: "",
-    city: "",
-    state: "",
-    pincode: ""
-  });
-
-  const validateForm: any = {
+  const [submit, setSubmit] = useState(false);
+  const [formData, setFormData] = useState({
     name: {
       required: true,
-      validation: [(value:string)=>value.length > 2],
-      invalidMessage: "Please provide valid name."
+      label: "Name",
+      key: "name",
+      value: "",
+      type: "input",
+      invalid: false,
+      validation: [(value: string) => value.length > 2 && value.length < 20],
+      message: "Please provide valid name.",
     },
     phone: {
+      label: "Phone (+91)",
+      key: "phone",
+      value: "",
+      type: "input",
       required: true,
-      validation: [(value:string)=>value.length === 10],
-      invalidMessage: "Please provide valid 10 digit phone number."
+      invalid: false,
+      validation: [(value: string) => value.length === 10],
+      message: "Please provide valid 10 digit phone number.",
     },
     house: {
       required: true,
-      validation: [(value:string)=>value.length > 2],
-      invalidMessage: "invalid Entry"
-    },
-    village: {
-      validation: [(value:string)=>value.length > 2],
-      invalidMessage: "invalid Entry"
+      label: "House, Building, Company",
+      key: "house",
+      value: "",
+      type: "input",
+      invalid: false,
+      validation: [(value: string) => value.length > 2 && value.length < 30],
+      message: "Invalid Entry",
     },
     landmark: {
+      type: "input",
+      label: "Landmark",
+      key: "landmark",
+      value: "",
       required: true,
-      validation: [(value:string)=>value.length > 5],
-      invalidMessage: "invalid Entry"
+      invalid: false,
+      validation: [(value: string) => value.length > 2 && value.length < 30],
+      message: "Invalid Entry",
     },
     city: {
+      type: "dropDown",
+      dropDownValues: [
+        "Adoor",
+        "Alappuzha (Alleppey)",
+        "Aluva",
+        "Angamaly",
+        "Attingal",
+        "Calicut (Kozhikode)",
+        "Changanassery",
+        "Chavakkad",
+        "Chengannur",
+        "Cherthala",
+        "Cherthala",
+        "Cheruthuruthi",
+        "Chittur-Thathamangalam",
+        "Ernakulam",
+        "Guruvayoor",
+        "Idukki",
+        "Irinjalakuda",
+        "Kanhangad",
+        "Kannur",
+        "Kasaragod",
+        "Kayamkulam",
+        "Kochi (Cochin)",
+        "Kollam (Quilon)",
+        "Koothuparamba",
+        "Kottarakkara",
+        "Kottayam",
+        "Kozhikode (Calicut)",
+        "Kunnamkulam",
+        "Kuthuparamba",
+        "Malappuram",
+        "Mananthavady",
+        "Manjeri",
+        "Mannarkkad",
+        "Mattanur",
+        "Mavelikara",
+        "Muvattupuzha",
+        "Nedumangad",
+        "Nedumbassery",
+        "Neyyattinkara",
+        "Nilambur",
+        "North Paravur",
+        "Ottappalam",
+        "Palakkad (Palghat)",
+        "Pandalam",
+        "Pathanamthitta",
+        "Payyannur",
+        "Perinthalmanna",
+        "Perumbavoor",
+        "Ponnani",
+        "Punalur",
+        "Shoranur",
+        "Taliparamba",
+        "Thalassery",
+        "Thiruvalla",
+        "Thiruvananthapuram (Trivandrum)",
+        "Thiruvankulam",
+        "Thodupuzha",
+        "Thrissur",
+        "Tirur",
+        "Tiruvalla",
+        "Tiruvananthapuram (Trivandrum)",
+        "Tiruvannamalai",
+        "Tiruvattur",
+        "Tiruvottiyur",
+        "Vaikom",
+        "Varkala",
+        "Vatakara",
+      ],
       required: true,
-      validation: [(value:string)=>value.length > 4],
-      invalidMessage: "invalid Entry"
+      label: "City",
+      key: "city",
+      value: "",
+      invalid: false,
+      validation: [(value: string) => value.length > 2 && value.length < 20],
+      message: "Invalid Entry",
     },
     state: {
-      validation: [(value:string)=>value.length > 2],
-      invalidMessage: "invalid Entry"
+      type: "input",
+      label: "State",
+      key: "state",
+      value: "Kerala",
+      required: false,
+      invalid: false,
+      disabled: true,
+      validation: [(value: string) => value.length > 2 && value.length < 20],
+      message: "Invalid Entry",
     },
     pincode: {
+      type: "input",
       required: true,
-      validation: [(value:string)=>value.length === 6],
-      invalidMessage: "Please provide valid 6 digit pincode."
-    }
-  }
-
-  const checkSubmitable = () => {
-    let formValid:boolean = true;
-    for (const item of Object.keys(validateForm)){
-      if (validateForm[item].required) {
-        const isValid = checkForm[item] === "valid"
-        console.log(isValid)
-        if(!isValid) {
-          formValid = false;
-          break;
-        }
-      }
-    };
-    setSubmit(formValid)
-  }
-
-  const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = event.target;
-    if ("phone pincode".includes(name)) {
-      value = value.replace(/[^\d]/, "");
-    }
-    await setForm((prevProps) => ({
-      ...prevProps,
-      [name]: value,
-    }));
-  };
-
-  const handleBlur = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = event.target;
-    await validation(name, value);
-  };
-
-  const validation = async (name:string, value:string) => {
-    const validationReq = validateForm[name].required;
-    if (validationReq) {
-      const isInValid = validateForm[name].validation.find((fn:any)=>fn(value)===false)
-      await setCheckForm((prevProps:any) => ({
-        ...prevProps,
-        [name]: isInValid ? "invalid" : "valid",
-      }));
-    } else {
-      const isInValid = validateForm[name].validation.find((fn:any)=>fn(value)===false)
-      await setForm((prevProps) => ({
-        ...prevProps,
-        [name]: isInValid ? "" : value,
-      }));
-    }
-  }
+      label: "Pincode",
+      key: "pincode",
+      value: "",
+      invalid: false,
+      validation: [(value: string) => value.length === 6],
+      message: "Please provide valid 6 digit pincode.",
+    },
+  });
 
   const handleSubmit = (event: React.SyntheticEvent) => {
-    Object.entries(form).forEach(item=> validation(...item))
-    event.preventDefault();
-    console.log(Object.entries(form));
+    // Object.entries(form).forEach(item=> validation(...item))
+    // event.preventDefault();
+    console.log(Object.entries(formData));
   };
 
   const styles = stylex.create({
@@ -178,32 +210,9 @@ const SignUp: FC = () => {
       paddingTop: "16px",
       flexDirection: "column",
     },
-    formlabel: {
-      color: "grey"
-    },
-    formInvalidMessage: {
-      color: "#F08080",
-      fontSize: "12px",
-      marginTop: "3px"
-    },
-    formInput: {
-      width: "90%",
-      height: "35px",
-      marginTop: "8px",
-      background: "rgba(0, 0, 0, .03)",
-      "border-radius": "5px",
-      border: "none",
-      "-webkit-transition-property": "background, box-shadow",
-      "-webkit-transition-duration": "400ms, 400ms ",
-      ":focus": {
-        "box-shadow": "0px 0px 1px 1px grey",
-        background: "rgba(0, 0, 0, 0.1)",
-        outline: "none"
-      }
-    },
     submitButton: {
       "pointer-events": !submit ? "none" : "true",
-    }
+    },
   });
 
   return (
@@ -225,106 +234,16 @@ const SignUp: FC = () => {
           ) : (
             <div {...stylex.props(styles.formContainer)}>
               <div>
+                {Object.values(formData).map((data) => (
+                  <Input formData={data} setFormData={setFormData} />
+                ))}
                 <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>Name{validateForm.name.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.name === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.name.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="name"
-                    value={form.name}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>Phone (+91){validateForm.phone.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.phone === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.phone.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="phone"
-                    value={form.phone}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>House, Building, Company{validateForm.house.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.house === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.house.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="house"
-                    value={form.house}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>Area, Street, Village{validateForm.village.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.village === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.village.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="village"
-                    value={form.village}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>Landmark{validateForm.landmark.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.landmark === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.landmark.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="landmark"
-                    value={form.landmark}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>City{validateForm.city.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.city === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.city.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="city"
-                    value={form.city}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>State{validateForm.state.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.state === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.state.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="state"
-                    value={form.state}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                  <label {...stylex.props(styles.formlabel)}>Pincode{validateForm.pincode.required && <span style={{color:'#F08080'}}>*</span>}</label>
-                  {checkForm.pincode === "invalid" && <p {...stylex.props(styles.formInvalidMessage)}>{validateForm.pincode.invalidMessage}</p>}
-                  <input
-                    {...stylex.props(styles.formInput)}
-                    type="text"
-                    name="pincode"
-                    value={form.pincode}
-                    onBlur={handleBlur}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div {...stylex.props(styles.formControl)}>
-                <div {...stylex.props(styles.submitButton)} onClick={handleSubmit}>
-                  <Button content="Login" color={!submit? "grey": ""} />
-                </div>
+                  <div
+                    {...stylex.props(styles.submitButton)}
+                    onClick={handleSubmit}
+                  >
+                    <Button content="Login" color={!submit ? "grey" : ""} />
+                  </div>
                 </div>
               </div>
             </div>
