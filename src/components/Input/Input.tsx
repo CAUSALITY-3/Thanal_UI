@@ -1,5 +1,6 @@
 import { FC, ReactNode } from "react";
 import * as stylex from "@stylexjs/stylex";
+import DropDown from "./DropDown";
 
 interface Props {
   formData: FormData;
@@ -45,6 +46,7 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
       },
     }));
     invalid ? handleValidation(fieldName, inputValue) : null;
+    console.log(fieldName, inputValue, formData)
   };
 
   const handleBlur = (fieldName: string, inputValue: string) => {
@@ -126,16 +128,14 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
           onChange={(e) => handleChange(key, e.target.value)}
         />
       ) : (
-        <select
-          value={value}
-          {...stylex.props(styles.formInput)}
-          onChange={(e) => handleChange(key, e.target.value)}
-        > {
-          dropDownValues?.map(drop=>(
-            <option value={drop}>{drop}</option>
-          ))
-        }
-        </select>
+        <DropDown 
+        keyName={key}
+        value={value}
+        handleChange={handleChange}
+        handleBlur={handleBlur}
+        disabled={!!disabled}
+        dropDownValues={dropDownValues || []}
+        />
       )}
     </div>
   );
