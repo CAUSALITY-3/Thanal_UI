@@ -1,4 +1,4 @@
-import { FC, HTMLInputTypeAttribute, useState } from "react";
+import { FC, HTMLInputTypeAttribute, useEffect, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import googleIcon from "../../assets/google_icon.svg";
 import { useAppSelector } from "../../Store/hooks";
@@ -12,6 +12,7 @@ const SignUp: FC = () => {
   const isMobile = useAppSelector((state) => state.nav.isMobile);
 
   const [submit, setSubmit] = useState(false);
+  const [lastOne, setLastOne] = useState(false);
   const [formData, setFormData] = useState({
     name: {
       required: true,
@@ -28,7 +29,7 @@ const SignUp: FC = () => {
       key: "phone",
       value: "",
       type: "input",
-      required: true,
+      required: false,
       invalid: false,
       validation: [(value: string) => value.length === 10],
       message: "Please provide valid 10 digit phone number.",
@@ -129,7 +130,7 @@ const SignUp: FC = () => {
       key: "city",
       value: "",
       invalid: false,
-      validation: [(value: string) => value.length > 2 && value.length < 20],
+      validation: [(value: string) => value.length > 2],
       message: "Invalid Entry",
     },
     state: {
@@ -155,9 +156,50 @@ const SignUp: FC = () => {
     },
   });
 
+  useEffect(() => {
+    const invalid = Object.values(formData).filter(
+      (form) => form.required && (form.invalid || !form.value)
+    );
+    if (!invalid.length) {
+      setSubmit(true);
+    } else {
+      setSubmit(false);
+      if (invalid.length === 1) {
+        setLastOne(true);
+      }
+    }
+  }, [formData]);
+
+  const validate = () => {
+    Object.values(formData).forEach((element) => {
+      if (element) {
+        const isInValid =
+          element.required &&
+          !!element.validation.find((fn: any) => fn(element.value) === false);
+        if (isInValid) {
+          setFormData((prevState: any) => ({
+            ...prevState,
+            [element.key]: {
+              ...prevState[element.key],
+              invalid: true,
+            },
+          }));
+        } else {
+          setFormData((prevState: any) => ({
+            ...prevState,
+            [element.key]: {
+              ...prevState[element.key],
+              invalid: false,
+            },
+          }));
+          console.log(formData);
+        }
+      }
+    });
+  };
+
   const handleSubmit = (event: React.SyntheticEvent) => {
-    // Object.entries(form).forEach(item=> validation(...item))
-    // event.preventDefault();
+    validate();
     console.log(Object.entries(formData));
   };
 
@@ -235,7 +277,11 @@ const SignUp: FC = () => {
             <div {...stylex.props(styles.formContainer)}>
               <div>
                 {Object.values(formData).map((data) => (
-                  <Input formData={data} setFormData={setFormData} />
+                  <Input
+                    formData={data}
+                    setFormData={setFormData}
+                    lastOne={lastOne}
+                  />
                 ))}
                 <div {...stylex.props(styles.formControl)}>
                   <div

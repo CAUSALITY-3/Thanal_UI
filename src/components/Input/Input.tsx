@@ -1,10 +1,11 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import * as stylex from "@stylexjs/stylex";
 import DropDown from "./DropDown";
 
 interface Props {
   formData: FormData;
   setFormData: Function;
+  lastOne: boolean;
 }
 
 interface FormData {
@@ -20,7 +21,7 @@ interface FormData {
   disabled?: boolean;
 }
 
-export const Input: FC<Props> = ({ formData, setFormData }) => {
+export const Input: FC<Props> = ({ formData, setFormData, lastOne }) => {
   const {
     label,
     key,
@@ -34,6 +35,7 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
     dropDownValues,
   } = formData;
 
+  const [blured, setBlured] = useState(false);
   const handleChange = (fieldName: string, inputValue: string) => {
     if ("phone pincode".includes(fieldName)) {
       inputValue = inputValue.replace(/[^\d]/, "");
@@ -45,12 +47,13 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
         value: inputValue,
       },
     }));
-    invalid ? handleValidation(fieldName, inputValue) : null;
-    console.log(fieldName, inputValue, formData)
+    invalid || lastOne ? handleValidation(fieldName, inputValue) : null;
+    console.log(fieldName, inputValue, formData);
   };
 
   const handleBlur = (fieldName: string, inputValue: string) => {
     handleValidation(fieldName, inputValue);
+    setBlured(true);
   };
 
   const handleValidation = (fieldName: string, inputValue: string) => {
@@ -74,7 +77,7 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
             invalid: false,
           },
         }));
-        console.log(formData)
+        console.log(formData);
       }
     }
   };
@@ -118,7 +121,9 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
         {label}
         {required && <span style={{ color: "#F08080" }}>*</span>}
       </label>
-      {invalid && <p {...stylex.props(styles.formInvalidMessage)}>{message}</p>}
+      {invalid && blured && (
+        <p {...stylex.props(styles.formInvalidMessage)}>{message}</p>
+      )}
       {type === "input" ? (
         <input
           {...stylex.props(styles.formInput)}
@@ -129,13 +134,13 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
           onChange={(e) => handleChange(key, e.target.value)}
         />
       ) : (
-        <DropDown 
-        keyName={key}
-        value={value}
-        handleChange={handleChange}
-        handleBlur={handleBlur}
-        disabled={!!disabled}
-        dropDownValues={dropDownValues || []}
+        <DropDown
+          keyName={key}
+          value={value}
+          handleChange={handleChange}
+          handleBlur={handleBlur}
+          disabled={!!disabled}
+          dropDownValues={dropDownValues || []}
         />
       )}
     </div>
