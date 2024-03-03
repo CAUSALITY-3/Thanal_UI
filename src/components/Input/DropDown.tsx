@@ -63,7 +63,7 @@ export const DropDown: FC<Props> = ({
   });
 
   const [mouseOverDpropDown, setMouseOverDpropDown] = useState(false);
-  const [blur, setBlur] = useState(false);
+  const [blur, setBlur] = useState(true);
   const [filteredValues, setFilteredValues] = useState(dropDownValues);
   const [searchText, setSearchText] = useState("");
 
@@ -88,7 +88,7 @@ export const DropDown: FC<Props> = ({
           <div
             onClick={() => {
               handleChange(keyName, drop);
-              setBlur(false);
+              setBlur(true);
               setSearchText("");
             }}
           >
@@ -99,31 +99,45 @@ export const DropDown: FC<Props> = ({
     );
   };
 
+  const closeDrop = () => {
+    if (!mouseOverDpropDown) {
+      setBlur(true);
+      setMouseOverDpropDown(false);
+    } else {
+      setTimeout(() => {
+        setMouseOverDpropDown(false);
+      });
+    }
+    handleBlur(keyName, value);
+  };
+
   return dropDownValues.length < 10 ? (
-    <div
-      onFocus={() => setBlur(true)}
-      onBlur={() => (!mouseOverDpropDown ? setBlur(false) : null)}
-    >
-      <div {...stylex.props(styles.formInput)} tabIndex={0}>
+    <div>
+      <div
+        {...stylex.props(styles.formInput)}
+        tabIndex={0}
+        onFocus={() => setBlur(false)}
+        onBlur={closeDrop}
+      >
         {value || "Select one from list ..."}
       </div>
-      {blur ? drop() : <></>}
+      {!blur ? drop() : <></>}
     </div>
   ) : (
-    <div>
+    <div onFocus={() => setBlur(false)} onBlur={closeDrop}>
       <input
         {...stylex.props(styles.formInput)}
         type="text"
-        value={searchText || (!blur ? value || "Select one from list ..." : "")}
+        value={searchText || (blur ? value || "Select one from list ..." : "")}
         onFocus={() => {
-          setBlur(!blur);
+          setBlur(false);
           setFilteredValues(dropDownValues);
         }}
         onChange={(e) => filterDrop(e.target.value)}
-        onBlur={() => (!mouseOverDpropDown ? setBlur(false) : null)}
+        onBlur={closeDrop}
         placeholder="Search..."
       />
-      {blur ? drop() : <></>}
+      {!blur ? drop() : <></>}
     </div>
   );
 };

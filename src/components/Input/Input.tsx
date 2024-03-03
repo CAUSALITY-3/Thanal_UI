@@ -74,6 +74,7 @@ export const Input: FC<Props> = ({ formData, setFormData }) => {
             invalid: false,
           },
         }));
+        console.log(formData)
       }
     }
   };
